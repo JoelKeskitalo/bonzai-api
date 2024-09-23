@@ -5,12 +5,62 @@ service: bonzai-api
 
 provider:
   name: aws
-  runtime: nodejs20.x
+  runtime: nodejs18.x
+  region: eu-north-1
+  iamRoleStatements:
+    - Effects: Allow
+      Actions:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:ScanItem
+        - dynamodb:UpdateItem
 
 functions:
-  hello:
-    handler: handler.hello
+  checkAvailability:
+    handler: functions/checkAvailability/index.handler
     events:
       - httpApi:
-          path: /
+          path: /rooms/availability/{roomId}
           method: get
+
+  createBooking:
+    handler: functions/createBooking/index.handler
+    events:
+      - httpApi:
+          path: /createBooking
+          method: post
+
+  createGuest:
+    handler: functions/createGuest/index.handler
+    events:
+      - httpApi:
+          path: /createGuest
+          method: post
+
+  getAllRooms:
+    handler: functions/getAllRooms/index.handler
+    events:
+      - httpApi:
+          path: /rooms
+          method: get
+
+  getGuestById:
+    handler: functions/getGuestById/index.handler
+    events:
+      - httpApi:
+          path: /guests/{guestId}
+          method: get
+
+  getRoomById:
+    handler: functions/getRoomById/index.handler
+    events:
+      - httpApi:
+          path: /rooms/{roomId}
+          method: get
+
+  verifyRoom:
+    handler: functions/verifyRoom/index.handler
+    events:
+      - httpApi:
+          path: /rooms/verify/{roomId}
+          method: post
