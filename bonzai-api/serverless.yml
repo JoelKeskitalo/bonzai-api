@@ -8,10 +8,11 @@ provider:
   runtime: nodejs18.x
   region: eu-north-1
   iamRoleStatements:
-    - Effects: Allow
+    - Effect: Allow
       Action:
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:Scan
         - dynamodb:ScanItem
         - dynamodb:UpdateItem
         - dynamodb:DescribeTable
