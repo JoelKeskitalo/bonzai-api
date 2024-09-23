@@ -9,11 +9,19 @@ provider:
   region: eu-north-1
   iamRoleStatements:
     - Effects: Allow
-      Actions:
+      Action:
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:ScanItem
         - dynamodb:UpdateItem
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:DeleteItem
+        - dynamodb:CreateTable
+      Resource:
+        - arn:aws:dynamodb:eu-north-1:*:table/Bonzai-Rooms
+        - arn:aws:dynamodb:eu-north-1:*:table/Bonzai-Bookings
+        - arn:aws:dynamodb:eu-north-1:*:table/Bonzai-Guest
 
 functions:
   checkAvailability:
