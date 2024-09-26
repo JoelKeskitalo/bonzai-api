@@ -46,6 +46,13 @@ functions:
           path: /createGuest
           method: post
 
+  getAllGuests:
+    handler: functions/getAllGuests/index.handler
+    events:
+      - httpApi:
+          path: /getAllGuests
+          method: get
+
   getAllRooms:
     handler: functions/getAllRooms/index.handler
     events:
