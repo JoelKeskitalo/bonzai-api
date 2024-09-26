@@ -2,7 +2,7 @@ const { dynamoDb } = require('../../database/db')
 
 module.exports.handler = async (event) => {
     try {
-        const { roomId } = JSON.parse(event.body)
+        const { roomId } = event.pathParameters
 
         if(!roomId) {
             return {
@@ -44,7 +44,7 @@ module.exports.handler = async (event) => {
                 '#available': 'available'
             },
             ExpressionAttributeValues: {
-                'newStatus': newStatus
+                ':newStatus': newStatus
             },
             ReturnValues: 'ALL_NEW'
         }
