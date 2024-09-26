@@ -13,7 +13,10 @@ module.exports.handler = async (event) => {
 
         const roomParams = {
             TableName: 'Bonzai-Rooms',
-            Key: roomId
+            FilterExpression: 'roomId = :roomId',
+            ExpressionAttributeValues: {
+                ':roomId': roomId
+            }
         }
 
         const result = await dynamoDb.scan(roomParams)
